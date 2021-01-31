@@ -4,10 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clubhouse Avatar Styler</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container {
+            width: 600px;
+            max-width: 90vw;
+            margin: 0 auto;
+        }
+
+        .container .steps {
+            display: none;
+        }
+
+        .container.step-1 .step-1 {
+            display: block;
+        }
+
+        .container.step-2 .step-2 {
+            display: block;
+        }
+        
+        label {
+            background-color: yellow;
+            color: black;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        label input {
+            display: none;
+        }
+        #preview {
+            box-sizing: border-box;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 42%;
+            border-style: solid;
+            border-width: var(--border-width, 5px);
+            border-color: var(--border-color, #336699);
+        }
+
+        canvas {
+            position: absolute;
+            top: -1000px;
+            left: -1000px;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Clubhouse Avatar Styler</h1>
+    <div id="container" class="container step-1">
+        <h1>chpic - Clubhouse Avatar Styler</h1>
 
-    <p>Coming soon...</p>
+        <div class="steps step-1">
+            <label><input type="file" id="filepicker" accept="image/*"> Pick your image</label>
+        </div>
+
+        <div class="steps step-2">
+            <div id="preview-container">
+                <img id="preview">
+            </div>
+
+            <a id="download" download="filename.png">Download</a>
+
+        </div>
+
+        <canvas id="canvas" width="200" height="200"></canvas>
+
+    </div>
+
+    <script src="./main.js"></script>
 </body>
 </html>
