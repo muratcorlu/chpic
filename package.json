@@ -2,9 +2,10 @@
   "name": "chpic",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel src/index.html",
+    "build": "rm docs/*.js && parcel build src/index.html -d docs --no-source-maps"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,10 @@
   },
   "homepage": "https://github.com/muratcorlu/chpic#readme",
   "dependencies": {
-    "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.5"
   },
   "devDependencies": {
-    "cssnano": "^4.1.10"
+    "cssnano": "^4.1.10",
+    "parcel-bundler": "^1.12.4"
   }
 }

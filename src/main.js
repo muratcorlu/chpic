@@ -58,7 +58,7 @@ document.getElementById('filepicker').addEventListener('change', (el) => {
 document.getElementById('download').addEventListener('click', () => {
     canvas.toBlob(function(blob) {
         saveAs(blob, "ch-avatar.png");
-    });
+    }, 'image/png');
     // domtoimage.toSvg(document.getElementById('preview'))
     //     .then(function (result) {
     //         console.log(result);
@@ -68,8 +68,8 @@ document.getElementById('download').addEventListener('click', () => {
 });
 
 
-document.getElementById('download').addEventListener('click', () => {
+document.getElementById('share').addEventListener('click', () => {
     canvas.toBlob(function(blob) {
         navigator.share({ blob, mimeType: 'image/png'});
-    });
+    }, 'image/png');
 })
