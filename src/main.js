@@ -15,7 +15,7 @@ document.getElementById('filepicker').addEventListener('change', (el) => {
 
         domvas.toImage(document.getElementById('preview'), function () {
             context.drawImage(this, 0, 0);
-            document.getElementById('download').href = canvas.toDataURL('image/png').replace('image/png', 'octet/stream');
+            document.getElementById('download').href = canvas.toDataURL('image/png');
         });
 
 
