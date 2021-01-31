@@ -47,6 +47,14 @@
             border-color: var(--border-color, #336699);
         }
 
+        #share {
+            display: none;
+        }
+
+        .container.share #share {
+            display: block;
+        }
+        
         canvas {
             position: absolute;
             top: -1000px;
@@ -69,7 +77,8 @@
                 <img id="preview">
             </div>
 
-            <a id="download" download="filename.png">Download</a>
+            <button id="download">Download</button>
+            <button id="share">Share</button>
 
         </div>
 

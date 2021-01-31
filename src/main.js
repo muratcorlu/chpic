@@ -1,9 +1,14 @@
-var domtoimage = require('dom-to-image');
+// var domtoimage = require('dom-to-image');
+var { saveAs } = require('file-saver');
 var domvas = require('./domvas');
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
 var container = document.getElementById('container');
+
+if (navigator.canShare && navigator.canShare()) {
+    container.classList.add('share');
+}
 
 document.getElementById('filepicker').addEventListener('change', (el) => {
     var reader = new FileReader();
@@ -15,7 +20,7 @@ document.getElementById('filepicker').addEventListener('change', (el) => {
 
         domvas.toImage(document.getElementById('preview'), function () {
             context.drawImage(this, 0, 0);
-            document.getElementById('download').href = canvas.toDataURL('image/png');
+            // document.getElementById('download').href = canvas.toDataURL('image/png');
         });
 
 
@@ -50,12 +55,21 @@ document.getElementById('filepicker').addEventListener('change', (el) => {
     reader.readAsDataURL(el.target.files[0])
 });
 
-// document.getElementById('download').addEventListener('click', () => {
+document.getElementById('download').addEventListener('click', () => {
+    canvas.toBlob(function(blob) {
+        saveAs(blob, "ch-avatar.png");
+    });
+    // domtoimage.toSvg(document.getElementById('preview'))
+    //     .then(function (result) {
+    //         console.log(result);
+    //         // window.saveAs(result, 'my-ch-avatar.png');
+    //     })
+    //     .catch((err) => console.error(err));
+});
 
-//     domtoimage.toSvg(document.getElementById('preview'))
-//         .then(function (result) {
-//             console.log(result);
-//             // window.saveAs(result, 'my-ch-avatar.png');
-//         })
-//         .catch((err) => console.error(err));
-// })
+
+document.getElementById('download').addEventListener('click', () => {
+    canvas.toBlob(function(blob) {
+        navigator.share({ blob, mimeType: 'image/png'});
+    });
+})
