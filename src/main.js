@@ -1,6 +1,4 @@
-// var domtoimage = require('dom-to-image');
 var { saveAs } = require('file-saver');
-var domvas = require('./domvas');
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
@@ -18,41 +16,49 @@ document.getElementById('filepicker').addEventListener('change', (el) => {
         container.classList.remove('step-1');
         container.classList.add('step-2');
 
-        var svg = document.querySelector('svg');
-        var data = new XMLSerializer().serializeToString(svg);
-        var win = window.URL || window.webkitURL || window;
-        var img = new Image();
-        var blob = new Blob([data], { type: 'image/svg+xml' });
-        var url = win.createObjectURL(blob);
-        img.onload = function () {
-            console.log(img);
-
-            context.drawImage(img, 0, 0);
-            win.revokeObjectURL(url);
-            var uri = canvas.toDataURL('image/png');
-            document.getElementById('downloadLink').setAttribute('href', uri);
-            // var a = document.createElement('a');
-            // document.body.appendChild(a);
-            // a.style = 'display: none';
-            // a.href = uri
-            // a.download = 'ch-avatar.png';
-            // a.click();
-            // window.URL.revokeObjectURL(uri);
-            // document.body.removeChild(a);
-        };
-        img.src = url;
     };
 
     reader.readAsDataURL(el.target.files[0])
+});
+
+document.getElementById('colorInput').addEventListener('change', (e) => {
+    document.getElementById('border').setAttribute('fill', e.target.value);
+});
+
+document.getElementById('borderSizeInput').addEventListener('change', (e) => {
+    const borderSize = parseInt(e.target.value);
+    const el = document.getElementById('innerShape');
+    const pos = 9300/200*borderSize;
+    const size = 9300/200*(200-borderSize*2);
+    el.setAttribute('x', pos);
+    el.setAttribute('y', pos);
+    el.setAttribute('width', size);
+    el.setAttribute('height', size);
 });
 
 document.getElementById('download').addEventListener('click', () => {
     container.classList.remove('step-2');
     container.classList.add('step-3');
 
-    canvas.toBlob(function(blob) {
-        saveAs(blob, "ch-avatar.png");
-    }, 'image/png');
+    var svg = document.querySelector('svg');
+    var data = new XMLSerializer().serializeToString(svg);
+    var win = window.URL || window.webkitURL || window;
+    var img = new Image();
+    var blob = new Blob([data], { type: 'image/svg+xml' });
+    var url = win.createObjectURL(blob);
+    img.onload = function () {
+        setTimeout(function () {
+            context.drawImage(img, 0, 0);
+
+            document.getElementById('result').setAttribute('src', canvas.toDataURL('image/png'));
+
+            canvas.toBlob(function(blob) {
+                saveAs(blob, "ch-avatar.png");
+            }, 'image/png');
+        
+        });
+    };
+    img.src = url;    
 });
 
 

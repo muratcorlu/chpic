@@ -13,20 +13,59 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Clubhouse Profile Picture Ring" />
     <meta name="twitter:card" content="summary" />
-
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Nunito, Arial, Helvetica, sans-serif;
+            background-color: #f2efe4;
         }
         .container {
             width: 600px;
+            height: 100vh;
             max-width: 90vw;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
         }
 
         .container .steps {
             display: none;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            font-size: 16px;
+        }
+
+        header {
+            height: 100px;
+        }
+        main {
+            flex: 1;
+            position: relative;
+        }
+
+        footer {
+            height: 40px;
+
+        }
+        footer p {
+            font-size: 12px;
+        }
+        footer p a {
+
         }
 
         .container.step-1 .step-1 {
@@ -41,17 +80,30 @@
             display: block;
         }
         
-        label {
-            background-color: yellow;
+        label, button {
+            background-color: white;
             color: black;
             padding: 15px;
             border-radius: 5px;
+            border: solid 1px #333333;
+            cursor: pointer;
         }
 
         label input {
             display: none;
         }
-        
+
+        #preview-container {
+            padding: 20px 0;
+        }
+/* 
+        #preview-container svg {
+            flex: 1;
+        }
+        #preview-container .settings {
+            flex: 3;
+        } */
+
         #share {
             display: none;
         }
@@ -71,16 +123,16 @@
 </head>
 <body>
     <div id="container" class="container step-1">
-        <h1>Clubhouse Profile Picture Ring</h1>
-
+        <header>
+            <h1>Clubhouse Profile Picture Ring</h1>
+        </header>
+        <main>
         <div class="steps step-1">
             <label><input type="file" id="filepicker" accept="image/*"> Pick your image</label>
         </div>
 
         <div class="steps step-2">
             <div id="preview-container">
-                <!-- <img id="preview"> -->
-
                 <svg version="1.0"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px" viewBox="0 0 9300 9300">
@@ -99,9 +151,17 @@
                     </g>
                 </svg>
 
+                <div class="settings">
+                    <p>Pick a color: <input type="color" value="ping" id="colorInput"></p>
+                    <p>Border size: <select id="borderSizeInput">
+                        <option value="5">Thin</option>
+                        <option value="10" selected>Normal</option>
+                        <option value="20">Thick</option>
+                    </select></p>
+                </div>
             </div>
-            <a href="#" id="downloadLink" download="ch-avatar.png">Download</a>
-            <!-- <button id="download">Download</button> -->
+
+            <button id="download">Download</button>
             <button id="share">Share</button>
 
         </div>
@@ -109,10 +169,13 @@
         <div class="steps step-3">
             <img id="result">
 
-            <p>If download didn't work you can long press or right click preview above and save if via system menu.</p>
+            <p>If download didn't work you can long press or right click preview above and save it via system menu.</p>
         </div>
         <canvas id="canvas" width="200" height="200"></canvas>
-
+        </main>
+        <footer>
+            <p>Made by <a href="https://twitter.com/faridmovsumov">@faridmovsumov</a> and <a href="https://twitter.com/muratcorlu">@muratcorlu</a></p>
+        </footer>
     </div>
 
     <script src="./main.js"></script>
