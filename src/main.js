@@ -11,7 +11,7 @@ if (navigator.canShare && navigator.canShare()) {
 document.getElementById('filepicker').addEventListener('change', (el) => {
     var reader = new FileReader();
     reader.onload = function (e) {
-        document.getElementById('preview').setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', e.target.result);
+        document.querySelector('.preview').setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', e.target.result);
 
         container.classList.remove('step-1');
         container.classList.add('step-2');
@@ -22,12 +22,12 @@ document.getElementById('filepicker').addEventListener('change', (el) => {
 });
 
 document.getElementById('colorInput').addEventListener('change', (e) => {
-    document.getElementById('border').setAttribute('fill', e.target.value);
+    document.querySelector('.border').setAttribute('fill', e.target.value);
 });
 
 document.getElementById('borderSizeInput').addEventListener('change', (e) => {
     const borderSize = parseInt(e.target.value);
-    const el = document.getElementById('innerShape');
+    const el = document.querySelector('.innerShape');
     const pos = 9300/200*borderSize;
     const size = 9300/200*(200-borderSize*2);
     el.setAttribute('x', pos);
