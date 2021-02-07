@@ -11,10 +11,26 @@ if (navigator.canShare && navigator.canShare()) {
 document.getElementById('filepicker').addEventListener('change', (el) => {
     var reader = new FileReader();
     reader.onload = function (e) {
-        document.querySelector('.preview').setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', e.target.result);
 
-        container.classList.remove('step-1');
-        container.classList.add('step-2');
+        var img = new Image;
+
+        img.onload = function() {
+            console.log(img.width, img.height);
+
+            document.querySelector('.preview').setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', e.target.result);
+
+            if (img.width > img.height ) {
+                document.querySelector('.preview').setAttribute('width', `${100 * (img.width / img.height)}%`);
+            } else {
+                document.querySelector('.preview').setAttribute('height', `${100 * (img.height / img.width)}%`);
+            }
+
+            container.classList.remove('step-1');
+            container.classList.add('step-2');
+        };
+
+        img.src = e.target.result; // i
+        
 
     };
 

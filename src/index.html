@@ -67,6 +67,18 @@
         footer p {
             font-size: 12px;
         }
+        footer p a {
+            background-color: #1e99e6;
+            border-radius: 3px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 20px;
+            padding: 0 6px;
+            white-space: nowrap;
+            text-decoration: none;
+        }
 
         .container.step-1 .step-1 {
             display: block;
@@ -80,7 +92,7 @@
             display: block;
         }
         
-        label, button {
+        .button, button {
             background-color: white;
             color: black;
             padding: 15px;
@@ -89,12 +101,17 @@
             cursor: pointer;
         }
 
-        label input {
+        .button input {
             display: none;
         }
 
         #preview-container {
             padding: 20px 0;
+        }
+
+        #preview-container label > svg {
+            width: 200px;
+            height: 200px;
         }
 
         #share {
@@ -103,6 +120,11 @@
 
         .container.share #share {
             display: block;
+        }
+
+        #result {
+            width: 200px;
+            height: 200px;
         }
 
         canvas {
@@ -121,14 +143,14 @@
         </header>
         <main>
         <div class="steps step-1">
-            <label><input type="file" id="filepicker" accept="image/*"> Pick your image</label>
+            <label class="button"><input type="file" id="filepicker" accept="image/*"> Pick your image</label>
         </div>
 
         <div class="steps step-2">
             <div id="preview-container">
-                <svg version="1.0"
+                <label for="filepicker"><svg version="1.0"
                     xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px" viewBox="0 0 9300 9300">
+                    xmlns:xlink="http://www.w3.org/1999/xlink" width="1000px" height="1000px" viewBox="0 0 9300 9300">
                     <g>
                         <path class="border" fill="pink" d="M4285 9293 c-1347 -62 -2295 -378 -3012 -1005 -218 -190 -463 -488 -622 -756 -354 -596 -547 -1278 -628 -2212 -25 -292 -25 -1049 0 -1340 81 -932 270 -1605 618 -2196 208 -354 498 -682 811 -918 663 -500 1459 -760 2598 -848 253 -19 1003 -16 1265 6 987 81 1724 302 2318 692 325 214 542 411 779 708 425 532 712 1285 823 2161 49 389 59 568 59 1065 0 485 -9 663 -55 1035 -87 714 -286 1335 -590 1847 -204 345 -494 670 -801 902 -411 310 -872 526 -1426 667 -162 41 -202 47 -203 27 0 -7 -4 -4 -9 8 -7 18 -27 24 -136 43 -498 87 -932 123 -1454 119 -151 -1 -302 -3 -335 -5z"/>
 
@@ -142,7 +164,7 @@
                             </g>
                         </svg>
                     </g>
-                </svg>
+                </svg></label>
 
                 <div class="settings">
                     <p>Pick a color: <input type="color" value="ping" id="colorInput"></p>
@@ -164,7 +186,7 @@
 
             <p>If download didn't work you can long press or right click preview above and save it via system menu.</p>
         </div>
-        <canvas id="canvas" width="200" height="200"></canvas>
+        <canvas id="canvas" width="1000" height="1000"></canvas>
         </main>
         <footer>
             <p>Made by <a href="https://twitter.com/faridmovsumov">@faridmovsumov</a> and <a href="https://twitter.com/muratcorlu">@muratcorlu</a></p>
