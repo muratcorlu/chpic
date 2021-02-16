@@ -30,11 +30,45 @@ document.getElementById('filepicker').addEventListener('change', (el) => {
         };
 
         img.src = e.target.result; // i
-        
+
 
     };
 
     reader.readAsDataURL(el.target.files[0])
+});
+
+document.getElementById('borderFilepicker').addEventListener('change', (el) => {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        var img = new Image;
+        img.onload = function() {
+            console.log(img.width, img.height);
+            document.querySelector('.borderPreview').setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', e.target.result);
+            if (img.width > img.height ) {
+                document.querySelector('.borderPreview').setAttribute('width', `${100 * (img.width / img.height)}%`);
+            } else {
+                document.querySelector('.borderPreview').setAttribute('height', `${100 * (img.height / img.width)}%`);
+            }
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(el.target.files[0])
+});
+
+document.getElementById('borderType').addEventListener('change', (e) => {
+    document.querySelectorAll('.borderType').forEach(type => type.classList.toggle('disabled', true));
+    switch (e.target.value){
+        case 'image':
+            document.querySelector('.borderType.image').classList.toggle('disabled', false);
+            document.querySelector('.borderPreview').setAttribute('visibility', 'visible');
+            document.querySelector('.border').setAttribute('visibility', 'hidden');
+            break;
+        default:
+            document.querySelector('.borderType.colour').classList.toggle('disabled', false);
+            document.querySelector('.borderPreview').setAttribute('visibility', 'hidden');
+            document.querySelector('.border').setAttribute('visibility', 'visible');
+            break;
+    }
 });
 
 document.getElementById('colorInput').addEventListener('change', (e) => {
@@ -71,10 +105,10 @@ document.getElementById('download').addEventListener('click', () => {
             canvas.toBlob(function(blob) {
                 saveAs(blob, "ch-avatar.png");
             }, 'image/png');
-        
+
         });
     };
-    img.src = url;    
+    img.src = url;
 });
 
 
